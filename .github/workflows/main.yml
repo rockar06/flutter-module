@@ -10,27 +10,20 @@ jobs:
     name: Build Android APK
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
 
-      - name: clean stale build and cache
-        uses: ./action
-        with:
-          args: clean
+      - uses: subosito/flutter-action@v1
+          with:
+            flutter-version: '1.17.5'
 
       - name: install dependencies
-        uses: ./action
-        with:
-          args: pub get
+        run: flutter pub get
 
       - name: run flutter tests
-        uses: ./action
-        with:
-          args: test
+        run: flutter test
 
       - name: build apk
-        uses: ./action
-        with:
-          args: build apk --debug --split-per-abi #Change to release mode if needed
+        run: flutter build apk --debug --split-per-abi #Change to release mode if needed
 
       - name: Push APK to Releases
         uses: ncipollo/release-action@v1
