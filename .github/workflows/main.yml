@@ -23,7 +23,7 @@ jobs:
         run: flutter test
 
       - name: build apk
-        run: flutter build apk --debug --split-per-abi #Change to release mode if needed
+        run: flutter build apk --debug #Only to validate flutter module is working
 
       - name: Push APK to Releases
         uses: ncipollo/release-action@v1
